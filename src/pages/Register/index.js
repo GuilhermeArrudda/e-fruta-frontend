@@ -6,7 +6,7 @@ import Button from "../../components/FormComponents/Button.js";
 import Input from "../../components/FormComponents/Input.js"
 import UserContext from '../../context/UserContext';
 import { sendSignUpRequest } from "../../services/E-FrutaServer.js";
-import { ThreeDots } from "react-loader-spinner";
+import Loader from "../../components/Loader.js";
 
 export default function SignUpPage(){
     const [name, setName] = useState('');
@@ -56,6 +56,10 @@ export default function SignUpPage(){
             });
     }
 
+    if(isLoading) {
+        return <Loader/>
+    }
+
     return(
         <Container onSubmit={signUp} >
             {/* <img src= {logo} alt="logo" /> */}
@@ -95,8 +99,8 @@ export default function SignUpPage(){
                 required
                 disabled={isLoading}
             />
-            <Button type="submit" disabled={isLoading}>
-            {!isLoading ? "Cadastrar" : <ThreeDots color="#FFF" height={50} width={80} />}
+            <Button type="submit">
+                Cadastrar
             </Button>
             <Link to={isLoading ? "/sign-up" : "/login"}> Primeira vez? Cadastre-se!</Link>
         </Container>

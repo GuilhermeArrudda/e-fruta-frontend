@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://e-fruta.herokuapp.com";
 
 function generateConfig (token) {
     return {
@@ -15,11 +15,11 @@ function sendSignUpRequest (body){
 };
 
 function sendSignInRequest (body){
-    return axios.post(`${BASE_URL}/sign-in`, body);
+    return axios.post(`${BASE_URL}/login`, body);
 };
 
 function getProductsRequest (token) {
-    return axios.post(`${BASE_URL}/homepage`, generateConfig(token));
+    return axios.post(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
 };
 
 
