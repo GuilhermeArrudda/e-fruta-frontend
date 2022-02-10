@@ -42,7 +42,7 @@ export default function Login(){
             <Input placeholder='E-mail' type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
             <Input placeholder='Senha' type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
             <Button>Entrar</Button>
-            <Link to={'/register'}> Primeira vez? Cadastre-se!</Link>
+            <Link to={'/sign-up'}> Primeira vez? Cadastre-se!</Link>
         </Container>
     );
 }
