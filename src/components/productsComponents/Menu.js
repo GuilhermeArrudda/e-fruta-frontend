@@ -35,8 +35,8 @@ export default function Menu() {
         <>
             <Wrapper>
                 <Logo onClick={() => change("/products")}>
-                    <img src={cat} alt="Cabeçudos"/>
-                    <p>Cabeçudos</p>
+                    <img src={cat} alt="E-Fruta"/>
+                    <p>E-Fruta</p>
                 </Logo>
                 <Buttons>
                     <Cart onClick={() => change("/cart")}>
