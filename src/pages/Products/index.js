@@ -26,14 +26,20 @@ export default function Products() {
     };
 
     return (
-        <>
+        <Container>
             <Page>
                 {products.map((e) => <Card data={e} key={e.id}/>)}
             </Page>
             <Footer/>
-        </>
+        </Container>
     );
 };
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+`;
 
 const Page = styled.article`
     margin: 85px 0;

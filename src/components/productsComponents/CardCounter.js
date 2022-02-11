@@ -27,7 +27,7 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
 };
 
 const CounterBox = styled.div`
-    display: flex,
+    display: flex;
     flex-direction: ${props => props.vertical ? 'column-reverse' : 'row'};
     align-items: center;
     gap: ${props => props.vertical ? 0 : '10px'};
@@ -58,7 +58,7 @@ const QntdBox = styled.input`
 `;
 
 const CounterButton = styled.button`
-    color: #005103;
+    color: #6bc06e;
     font-size: 30px;
     font-weight: 700;
     border: none;
