@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
-const Container = styled.form`
+const Container = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding-top: 40%;
-  padding-left: 6%;
-  padding-right: 6%;
+  width: 100vw;
+  height: 100vh;
   a{
     font-weight: bold;
     font-size: 15px;

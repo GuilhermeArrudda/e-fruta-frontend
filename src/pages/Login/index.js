@@ -3,7 +3,7 @@ import { useState } from 'react';
 //import logo from '../../assets/logo.png'
 import Container from '../../components/FormComponents/Container.js';
 import Button from "../../components/FormComponents/Button.js";
-import Input from "../../components/FormComponents/Input.js"
+import { GenericForm, Input } from "../../components/FormComponents/Input.js"
 import { useContext } from "react";
 import UserContext from '../../context/UserContext';
 import { sendSignInRequest } from "../../services/E-FrutaServer.js";
@@ -47,8 +47,9 @@ export default function Login(){
     }
 
     return(
-        <Container onSubmit={signIn} >
+        <Container>
             {/* <img src= {logo} alt="logo" /> */}
+            <GenericForm onSubmit={signIn}>
             <Input 
                 placeholder='E-mail' 
                 type="email" 
@@ -66,6 +67,7 @@ export default function Login(){
                 disabled={isLoading} 
             />
             <Button>Entrar</Button>
+            </GenericForm>
             <Link to={'/sign-up'}> Primeira vez? Cadastre-se!</Link>
         </Container>
     );

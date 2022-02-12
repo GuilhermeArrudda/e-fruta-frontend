@@ -3,10 +3,11 @@ import { useEffect, useState, useContext } from 'react';
 //import logo from '../../assets/logo.png'
 import Container from '../../components/FormComponents/Container.js';
 import Button from "../../components/FormComponents/Button.js";
-import Input from "../../components/FormComponents/Input.js"
+import { GenericForm, Input } from "../../components/FormComponents/Input.js"
 import UserContext from '../../context/UserContext';
 import { sendSignUpRequest } from "../../services/E-FrutaServer.js";
 import Loader from "../../components/Loader.js";
+import { sendAlert } from "../../components/productsComponents/Alert.js";
 
 export default function SignUpPage(){
     const [name, setName] = useState('');
@@ -36,6 +37,7 @@ export default function SignUpPage(){
         sendSignUpRequest(body)
             .then(response => {
                 setIsLoading(false);
+                sendAlert('success', 'Show!', 'Cadastro concluído.');
                 navigate("/login");
             })
             .catch(error => {
@@ -61,8 +63,9 @@ export default function SignUpPage(){
     }
 
     return(
-        <Container onSubmit={signUp} >
+        <Container>
             {/* <img src= {logo} alt="logo" /> */}
+            <GenericForm onSubmit={signUp}>
             <Input 
                 placeholder='Nome'
                 value={name} 
@@ -102,6 +105,7 @@ export default function SignUpPage(){
             <Button type="submit">
                 Cadastrar
             </Button>
+            </GenericForm>
             <Link to={isLoading ? "/sign-up" : "/login"}> Primeira vez? Cadastre-se!</Link>
         </Container>
     );

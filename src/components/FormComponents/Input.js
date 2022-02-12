@@ -18,4 +18,11 @@ const Input = styled.input`
     padding: 15px;
 `;
 
-export default Input;
+const GenericForm = styled.form`
+    width: 85vw;
+`
+
+export{
+     Input,
+     GenericForm
+};
