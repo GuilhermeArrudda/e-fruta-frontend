@@ -18,13 +18,18 @@ function sendSignInRequest (body){
     return axios.post(`${BASE_URL}/login`, body);
 };
 
+function sendLogoutRequest(token) {
+    return axios.delete(`${BASE_URL}/sign-out`, generateConfig(token));
+};
+
 function getProductsRequest (token) {
-    return axios.get(`${BASE_URL}/products`, generateConfig(token));
+    return axios.get(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
 };
 
 
 export {
     sendSignUpRequest,
     sendSignInRequest,
-    getProductsRequest
+    getProductsRequest,
+    sendLogoutRequest
 }

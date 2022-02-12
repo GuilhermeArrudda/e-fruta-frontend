@@ -9,12 +9,7 @@ html{
 }
 
 body{
-    background-color: #6bc06e;
+    background-color: #c9d3c9;
     height: 100%;
     font-family: Raleway;
-}
-
-.root{
-    height: 100%;
-    position: relative;
 }

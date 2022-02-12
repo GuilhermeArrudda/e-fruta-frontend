@@ -26,6 +26,7 @@ export default function Login(){
             .then (response => {
                 setIsLoading(false);
                 setUserData(response.data);
+                localStorage.setItem("userData", JSON.stringify(response.data));
                 navigate('/products');
             })
             .catch (error => {
