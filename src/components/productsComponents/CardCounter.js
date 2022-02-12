@@ -63,7 +63,7 @@ const CounterButton = styled.button`
     font-weight: 700;
     border: none;
     background-color: #fff;
-    display: flex.
+    display: flex;
     text-align: center;
     cursor: pointer;
     &:disabled {

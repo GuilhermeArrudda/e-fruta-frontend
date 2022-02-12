@@ -30,7 +30,7 @@ export default function Products() {
         <Container>
             <Menu/>
             <Page>
-                {products.map((e) => <Card data={e} key={e.id}/>)}
+                {products.map((e) => <Card data={e} key={e._id}/>)}
             </Page>
             <Footer/>
         </Container>
