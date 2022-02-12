@@ -12,7 +12,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^4.0.3",
     "styled-components": "^5.3.3",
-    "sweetalert2": "^11.4.0",
+    "sweetalert2": "^11.1.9",
     "sweetalert2-react-content": "^4.2.0"
   },
   "scripts": {

@@ -73,6 +73,8 @@ const CardSC = styled.div`
     flex-direction: column;
     align-items: center;
     padding-bottom: 10px;
+    min-height: 100%;
+    padding-bottom: 50px;
 `;
 
 const CardImg = styled.img`

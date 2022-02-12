@@ -108,7 +108,6 @@ const TotalValue = styled.div`
         line-height: 36px;
         letter-spacing: 0.01em;
         color: #333333;
-
     }
 `
 
@@ -130,14 +129,12 @@ const CartItem = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 20px;
-
     p{
         font-weight: bold;
         font-size: 24px;
         line-height: 36px;
         letter-spacing: 0.01em;
         color: #333333;
-
     }
 `
 

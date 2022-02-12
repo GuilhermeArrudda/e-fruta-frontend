@@ -42,7 +42,7 @@ const QntdBox = styled.input`
     text-align: center;
     border-radius: 5px;
     border: none;
-    background-color: #c4c4c4;
+    background-color: #fff;
     color: #000;
     &:focus {
         outline: none;
@@ -58,7 +58,7 @@ const QntdBox = styled.input`
 `;
 
 const CounterButton = styled.button`
-    color: #005103;
+    color: #6bc06e;
     font-size: 30px;
     font-weight: 700;
     border: none;

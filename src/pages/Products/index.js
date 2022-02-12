@@ -5,6 +5,7 @@ import Footer from "../../components/productsComponents/Footer";
 import Card from "../../components/productsComponents/Card";
 import Loader from "../../components/Loader";
 import styled from "styled-components";
+import Menu from "../../components/productsComponents/Menu";
 
 export default function Products() {
     const [products, setProducts] = useState(null);
@@ -26,14 +27,21 @@ export default function Products() {
     };
 
     return (
-        <>
+        <Container>
+            <Menu/>
             <Page>
                 {products.map((e) => <Card data={e} key={e._id}/>)}
             </Page>
             <Footer/>
-        </>
+        </Container>
     );
 };
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+`;
 
 const Page = styled.article`
     margin: 85px 0;

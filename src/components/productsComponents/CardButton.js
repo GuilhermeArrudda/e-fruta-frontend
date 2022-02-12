@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const CardButtom = styled.button`
     width: 250px;
     height: 50px;
-    background-color: #005103;
+    margin-top: 20px;
+    background-color: #6bc06e;
     color: #fff;
     border-radius: 15px;
     border: none;

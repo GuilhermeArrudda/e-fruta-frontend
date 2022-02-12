@@ -4,6 +4,7 @@ import {SiGmail} from 'react-icons/si';
 import {FaWhatsapp} from 'react-icons/fa';
 import {AiOutlineFacebook} from 'react-icons/ai';
 import {FaTelegramPlane} from 'react-icons/fa';
+import cat from "../../assets/cat.png"
 
 
 export default function Footer() {
@@ -28,7 +29,7 @@ export default function Footer() {
                 </Icons>
             </ContactUs>
             <Logo>
-                
+                <LogoImg src={cat} alt="E-Fruta"/>
             </Logo>
         </Container>
     );
@@ -43,11 +44,14 @@ const Container = styled.div`
     justify-content: space-between;
     color: black;
     align-items: center;
+    position: absolute;
+    bottom: 0;
     @media (max-width: 570px) {
         flex-direction: column-reverse;
         height: 100%;
         gap: 20px;
         padding-bottom: 20px;
+        position: static;
     };
 `;
 
@@ -101,11 +105,18 @@ const ContactUs = styled.div `
 
 const Logo = styled.div`
     width: 220px;
-    background-color: red;
     display: flex;
     justify-content: right;
     @media (max-width: 570px) {
         justify-content: center;
+    };
+`;
+
+const LogoImg = styled.img`
+    width: 140px;
+    padding-right: 30px;
+    @media (max-width: 570px) {
+        padding-right: 0px;
     };
 `;
 
