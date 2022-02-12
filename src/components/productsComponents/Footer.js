@@ -41,7 +41,8 @@ const Container = styled.div`
     background: #fff;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    color: black;
     align-items: center;
     position: absolute;
     bottom: 0;

@@ -23,7 +23,7 @@ function sendLogoutRequest(token) {
 };
 
 function getProductsRequest (token) {
-    return axios.get(`${BASE_URL}/products`, generateConfig(token));
+    return axios.get(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
 };
 
 
