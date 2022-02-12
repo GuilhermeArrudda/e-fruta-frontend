@@ -8,7 +8,7 @@ import CartContext from './context/CartContext';
 export default function App(){
 
   const [userData, setUserData] = useState('');
-  const [cart, setCart] = useState('');
+  const [cart, setCart] = useState([]);
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
