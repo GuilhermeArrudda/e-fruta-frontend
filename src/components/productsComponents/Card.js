@@ -6,16 +6,16 @@ import { CardButtom } from "./CardButton";
 import { sendAlert } from "./Alert";
 
 export default function Card({data}) {
-    const {id, name, price, stock, image} = data;
+    const {_id, name, price, stock, image} = data;
     const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1);
     const stockColor = stock <= 0 ? '#d10000' : stock <= 10 ? '#f7e306' : '#06d526';
     const {cart, setCart} = useContext(CartContext);
 
     function addToCart () {
         if (counterValue <= 0) return
-        const indexOfProduct = cart.map(e => e.id).indexOf(id)
+        const indexOfProduct = cart.map(e => e._id).indexOf(_id)
         if (indexOfProduct < 0){
-            setCart([...cart, {id, qtd: counterValue, price}])
+            setCart([...cart, {_id, qtd: counterValue, price}])
             sendAlert('success', 'É pra já!', `
                 O produto foi adicionado ao seu carrinho!
                 Clique no ícone de carrinho no menu para ver seus produtos,
@@ -39,6 +39,7 @@ export default function Card({data}) {
             `)
             } 
             setCart(newCart)
+            console.log(cart)
         }
     }
 
@@ -131,3 +132,4 @@ const CardStock = styled.div`
     border-radius: 20px 20px 0px 0px;
     margin-bottom: -30px;
 `;
+

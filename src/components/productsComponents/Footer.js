@@ -41,7 +41,7 @@ const Container = styled.div`
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: space-between;
-    color: black.
+    color: black;
     align-items: center;
     @media (max-width: 570px) {
         flex-direction: column-reverse;

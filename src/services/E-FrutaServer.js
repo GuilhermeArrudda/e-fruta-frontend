@@ -19,7 +19,7 @@ function sendSignInRequest (body){
 };
 
 function getProductsRequest (token) {
-    return axios.post(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
+    return axios.get(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
 };
 
 

@@ -28,7 +28,7 @@ export default function Products() {
     return (
         <>
             <Page>
-                {products.map((e) => <Card data={e} key={e.id}/>)}
+                {products.map((e) => <Card data={e} key={e._id}/>)}
             </Page>
             <Footer/>
         </>

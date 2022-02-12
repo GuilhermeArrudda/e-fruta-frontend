@@ -27,7 +27,7 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
 };
 
 const CounterBox = styled.div`
-    display: flex,
+    display: flex;
     flex-direction: ${props => props.vertical ? 'column-reverse' : 'row'};
     align-items: center;
     gap: ${props => props.vertical ? 0 : '10px'};
@@ -63,7 +63,7 @@ const CounterButton = styled.button`
     font-weight: 700;
     border: none;
     background-color: #fff;
-    display: flex.
+    display: flex;
     text-align: center;
     cursor: pointer;
     &:disabled {
