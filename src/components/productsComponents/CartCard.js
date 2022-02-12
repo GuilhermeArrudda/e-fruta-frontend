@@ -3,12 +3,36 @@ import styled from "styled-components";
 import { CardButtom } from "./CardButton";
 import CardCounter from "./CardCounter";
 import { useContext, useState } from "react";
+import { paymentAlert, sendAlert } from "./Alert";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../context/UserContext";
+import Menu from "./Menu";
 
 export default function CartCard({data}) {
     const stock = 1;
     const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1);
+    const {userData} = useContext(UserContext);
+    const navigate = useNavigate();
+
+    function finish(){
+        if(!userData) {
+            sendAlert('warning', 'Você precisa estar logado para fazer uma compra');
+            navigate('/login');
+            return;
+        };
+        paymentAlert()
+            .then((result) => {
+                if(result.isConfirmed) {
+                    navigate('/ordercompletion');
+                } else if (result.isDenied){
+                    return;
+                }
+            })
+    };
+
     return(
-        <>
+        <Container>
+            <Menu/>
             <CartItens>
                 <CartItem>
                     <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
@@ -90,8 +114,8 @@ export default function CartCard({data}) {
                 <p>valor total:</p>
                 <p>30,00R$</p>
             </TotalValue>
-            <CardButtom>Finalizar pedido</CardButtom>
-        </>
+            <CardButtom onClick={finish}>Finalizar pedido</CardButtom>
+        </Container>
     )
 }
 
@@ -144,3 +168,11 @@ const CardImg = styled.img`
     object-fit: cover;
     cursor: pointer;
 `;
+
+const Container = styled.article`
+    margin: 85px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+`

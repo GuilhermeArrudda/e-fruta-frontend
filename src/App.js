@@ -18,7 +18,7 @@ export default function App(){
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/sign-up" element={<SignUpPage />}></Route>
                 <Route path="/cart" element={<Cart />}></Route>
-                {/* <Route path="/ordercompletion" element={<OrderCompletion />}></Route> */}
+                <Route path="/ordercompletion" element={<OrderCompletion />}></Route>
             </Routes>
         </BrowserRouter>
       </CartContext.Provider>
