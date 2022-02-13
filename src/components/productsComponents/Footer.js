@@ -44,9 +44,9 @@ const Container = styled.div`
     justify-content: space-between;
     color: black;
     align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    @media (max-width: 570px) {
+    @media (max-width: 580px) {
         flex-direction: column-reverse;
         height: 100%;
         gap: 20px;
@@ -66,7 +66,7 @@ const PaymentMethods = styled.div `
         font-size: 18px;
         text-align: center;
     };
-    @media (max-width: 570px) {
+    @media (max-width: 580px) {
         margin-left: 0px;
     };
 `;
@@ -107,7 +107,7 @@ const Logo = styled.div`
     width: 220px;
     display: flex;
     justify-content: right;
-    @media (max-width: 570px) {
+    @media (max-width: 580px) {
         justify-content: center;
     };
 `;
@@ -115,7 +115,7 @@ const Logo = styled.div`
 const LogoImg = styled.img`
     width: 140px;
     padding-right: 30px;
-    @media (max-width: 570px) {
+    @media (max-width: 580px) {
         padding-right: 0px;
     };
 `;

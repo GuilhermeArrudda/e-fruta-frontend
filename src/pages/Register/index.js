@@ -10,31 +10,25 @@ import Loader from "../../components/Loader.js";
 import { sendAlert } from "../../components/productsComponents/Alert.js";
 
 export default function SignUpPage(){
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
+    const [data, setData] = useState({ name:"", image:"", email:"", password:"" });
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { userData } = useContext(UserContext)
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if(userData) {
-            navigate("/");
-        };
-        // eslint-disable-next-line
-    }, [userData]);
 
     function signUp(e){
         setIsLoading(true);
         e.preventDefault();
-        const body = {
-            name,
-            email,
-            password
-        };
+        if(!data.name || !data.password || !confirmPassword || !data.email) {
+            return sendAlert('error', 'Oops!', 'Preencha os campos obrigatórios!');
+        }
+        const { password } = data
+        if (password !== confirmPassword) {
+            setData({ ...data, password:"", });
+            setConfirmPassword("");
+            return sendAlert('error', '', "As senhas devem ser iguais!");
+        }
 
-        sendSignUpRequest(body)
+        sendSignUpRequest({ ...data })
             .then(response => {
                 setIsLoading(false);
                 sendAlert('success', 'Show!', 'Cadastro concluído.');
@@ -42,19 +36,10 @@ export default function SignUpPage(){
             })
             .catch(error => {
                 setIsLoading(false);
-                if(!error.response){
-                    alert("Servidor offline");
-                    return;
-                };
-                if(error.response.status === 409) {
-                    alert("E-mail já está em uso, escolha um diferente.");
-                    return;
-                };
-                if(error.reponse.status === 500) {
-                    alert("Erro do servidor, tente novamente em alguns instantes.");
-                    return;
-                };
-                alert("Ocorreu um erro inesperado! Por favor comunique a staff do site.");
+                console.log(error.response);
+                sendAlert('error', 'Opa :(', error.response? error.response.data : 'Erro no servidor!');
+                setData({ ...data, password:"", });
+                setConfirmPassword("");
             });
     }
 
@@ -68,41 +53,50 @@ export default function SignUpPage(){
             <GenericForm onSubmit={signUp}>
             <Input 
                 placeholder='Nome'
-                value={name} 
+                value={data.name} 
                 title="Insira seu nome"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setData({...data, name: e.target.value})}
+                required
+                disabled={isLoading} 
+            />
+            <Input 
+                placeholder='Imagem de Avatar (Opcional)'
+                type="text"
+                value={data.image} 
+                title="Insira seu nome"
+                onChange={(e) => setData({...data, image: e.target.value})}
                 required
                 disabled={isLoading} 
             />
             <Input 
                 placeholder="E-mail"
                 type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={data.email}
+                onChange={e => setData({...data, email: e.target.value})}
                 required
                 disabled={isLoading}
             />
             <Input 
                 placeholder="Senha"
                 type="password"
-                value={password}
+                value={data.password}
                 pattern="\S[0-9]{5,}"
                 title="Minimo 6 caracteres (Apenas números)."
-                onChange={e => setPassword(e.target.value)}
+                onChange={e => setData({...data, password: e.target.value})}
                 required
                 disabled={isLoading}
             />
             <Input 
                 placeholder="Confirme a senha"
                 type="password"
-                value={password2}
-                pattern={password}
+                value={confirmPassword}
+                pattern={data.password}
                 title="Senhas devem ser iguais"
-                onChange={e => setPassword2(e.target.value)}
+                onChange={e => setConfirmPassword(e.target.value)}
                 required
                 disabled={isLoading}
             />
-            <Button type="submit">
+            <Button type="submit" disabled={isLoading}>
                 Cadastrar
             </Button>
             </GenericForm>

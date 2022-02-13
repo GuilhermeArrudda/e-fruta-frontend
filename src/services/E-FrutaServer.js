@@ -26,10 +26,24 @@ function getProductsRequest (token) {
     return axios.get(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
 };
 
+function getOrders (token) {
+}
+
+
+function getCart (token) {
+    return axios.get(`${BASE_URL}/carts`, generateConfig(token))
+}
+
+function postCart (token, cart){
+    return axios.post(`${BASE_URL}/carts`, {cart: JSON.stringify(cart)}, generateConfig(token))
+}
+
 
 export {
     sendSignUpRequest,
     sendSignInRequest,
     getProductsRequest,
-    sendLogoutRequest
+    sendLogoutRequest,
+    getCart,
+    postCart
 }
