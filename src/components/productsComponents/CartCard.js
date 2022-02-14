@@ -4,13 +4,14 @@ import CardCounter from "./CardCounter";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext} from "react";
-
+import UserContext from "../../context/UserContext";
 
 export default function CartCard({data}) {
     const { name, qtd, price, stock, image} = data;
     const [counterValue, setCounterValue] = useState(qtd);
     const navigate = useNavigate();
-    const productPrice = (price/100*counterValue).toFixed(2)
+    const productPrice = (price/100*counterValue).toFixed(2);
+    const {cart, setCart} = useContext(CartContext)
     
     return(
         <>

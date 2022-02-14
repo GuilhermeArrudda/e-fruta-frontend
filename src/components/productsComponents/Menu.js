@@ -38,11 +38,10 @@ export default function Menu() {
         });
         return counter;
     };
-    
     return (
         <>
             <Wrapper>
-                <Logo onClick={() => change("/products")}>
+                <Logo onClick={() => change("/")}>
                     <img src={cat} alt="E-Fruta"/>
                     <p>E-Fruta</p>
                 </Logo>
@@ -54,7 +53,13 @@ export default function Menu() {
                         </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={userData.user.image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={
+                            userData !== "" ? 
+                            userData.user.image
+                            :
+                            "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} 
+                            alt="Avatar"
+                        />
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
