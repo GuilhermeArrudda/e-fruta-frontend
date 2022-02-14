@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../../components/productsComponents/Footer";
 import Menu from "../../components/productsComponents/Menu";
@@ -14,7 +13,7 @@ export default function OrderCompletion() {
                     Obrigado por comprar conosco! Faremos o possível para entregar seus produtos o quanto antes.
                 </SuccessMsg>
                 <SuccessMsg>
-                    Enquanto isso, você pode clicar <Link to='/pedidos'>aqui</Link> para acompanhar seus pedidos.
+                    Enquanto isso, você pode visualizar nossas lojas fisicas em nossas redes sociais.
                 </SuccessMsg>
             </PageStyle>
             <Footer/>
@@ -33,6 +32,7 @@ const PageStyle = styled.article`
 `;
 
 const SuccessMsg = styled.p`
+    font-weight: 700;
     text-align: center;
     line-height: 30px;
     width: 280px;

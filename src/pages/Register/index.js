@@ -8,6 +8,8 @@ import UserContext from '../../context/UserContext';
 import { sendSignUpRequest } from "../../services/E-FrutaServer.js";
 import Loader from "../../components/Loader.js";
 import { sendAlert } from "../../components/productsComponents/Alert.js";
+import styled from "styled-components";
+import cat from "../../assets/cat.png"
 
 export default function SignUpPage(){
     const [data, setData] = useState({ name:"", image:"", email:"", password:"" });
@@ -60,7 +62,7 @@ export default function SignUpPage(){
 
     return(
         <Container>
-            {/* <img src= {logo} alt="logo" /> */}
+            <LogoImg alt='logo' src={cat} onClick={()=>isLoading ? '' : navigate('/')} />
             <GenericForm onSubmit={signUp}>
             <Input 
                 placeholder='Nome'
@@ -115,3 +117,9 @@ export default function SignUpPage(){
         </Container>
     );
 };
+
+const LogoImg = styled.img`
+    width: 70px;
+    cursor: pointer;
+    margin-bottom: 30px;
+`;

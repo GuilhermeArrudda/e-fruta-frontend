@@ -10,7 +10,7 @@ import Menu from "../../components/productsComponents/Menu";
 import Footer from "../../components/productsComponents/Footer";
 
 export default function CartProducts(props) {
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
     const {userData} = useContext(UserContext);
     const navigate = useNavigate();
     const [total, setTotal] = useState(0);
@@ -33,6 +33,7 @@ export default function CartProducts(props) {
         paymentAlert()
             .then((result) => {
                 if(result.isConfirmed) {
+                    setCart([]);
                     navigate('/ordercompletion');
                 } else if (result.isDenied){
                     return;

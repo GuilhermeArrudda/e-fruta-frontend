@@ -8,6 +8,8 @@ import { useContext } from "react";
 import UserContext from '../../context/UserContext';
 import { sendSignInRequest } from "../../services/E-FrutaServer.js";
 import { sendAlert } from "../../components/productsComponents/Alert.js";
+import cat from "../../assets/cat.png"
+import styled from "styled-components";
 
 export default function Login(){
     const { setUserData } = useContext(UserContext);
@@ -46,7 +48,7 @@ export default function Login(){
 
     return(
         <Container>
-            {/* <img src= {logo} alt="logo" /> */}
+            <LogoImg alt='logo' src={cat} onClick={()=>isLoading ? '' : navigate('/')} />
             <GenericForm onSubmit={signIn}>
             <Input 
                 placeholder='E-mail' 
@@ -69,4 +71,10 @@ export default function Login(){
             <Link to={'/sign-up'}> Primeira vez? Cadastre-se!</Link>
         </Container>
     );
-}
+};
+
+const LogoImg = styled.img`
+    width: 70px;
+    cursor: pointer;
+    margin-bottom: 30px;
+`;
