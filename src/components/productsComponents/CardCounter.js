@@ -16,9 +16,6 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
         const item  = cart.find( item => item._id === id)
         console.log(item);
         if(type === "minus"){
-            if(item.qtd <= 0){
-                return;
-            }
             setValue(value-1);
             item && item.qtd--;
         }
