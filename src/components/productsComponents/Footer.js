@@ -44,7 +44,7 @@ const Container = styled.div`
     justify-content: space-between;
     color: black;
     align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     @media (max-width: 570px) {
         flex-direction: column-reverse;
