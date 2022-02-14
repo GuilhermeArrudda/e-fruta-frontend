@@ -8,6 +8,7 @@ export default function App(){
 
   const [userData, setUserData] = useState('');
   const [cart, setCart] = useState([]);
+  
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

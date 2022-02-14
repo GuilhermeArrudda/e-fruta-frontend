@@ -31,7 +31,7 @@ export default function Products() {
             <Menu/>
             <Page>
                 {products.map((e) => <Card data={e} key={e._id}/>)}
-            </Page>
+            </Page> 
             <Footer/>
         </Container>
     );
