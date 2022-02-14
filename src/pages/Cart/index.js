@@ -7,7 +7,6 @@ import UserContext from "../../context/UserContext";
 import { paymentAlert, sendAlert } from "../../components/productsComponents/Alert";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../components/productsComponents/Menu";
-import Footer from "../../components/productsComponents/Footer";
 
 export default function CartProducts(props) {
     const { cart, setCart } = useContext(CartContext);
@@ -15,7 +14,7 @@ export default function CartProducts(props) {
     const navigate = useNavigate();
     const [total, setTotal] = useState(0);
     console.log(cart)
-    const [quantityArray, setQauntityArray] = useState(cart.map (e => e.qtd))
+    const [quantityArray] = useState(cart.map (e => e.qtd))
     console.log(quantityArray);
     useEffect(() => {
         if (cart.length) {

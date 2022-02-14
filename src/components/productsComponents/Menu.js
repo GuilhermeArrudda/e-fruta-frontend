@@ -10,7 +10,7 @@ import cat from "../../assets/cat.png"
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
     const {cart} = useContext(CartContext);
-    const {userData, setUserData} = useContext(UserContext);
+    const {userData} = useContext(UserContext);
     const navigate = useNavigate();
 
     function change(whereTo) {
