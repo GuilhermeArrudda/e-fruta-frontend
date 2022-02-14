@@ -1,15 +1,52 @@
-import { useContext} from "react";
+import { useState, useEffect, useContext} from "react";
 import CartContext from "../../context/CartContext";
 import styled from "styled-components";
 import CartCard from "../../components/productsComponents/CartCard"
+import { CardButtom } from "../../components/productsComponents/CardButton";
+import UserContext from "../../context/UserContext";
+import { paymentAlert, sendAlert } from "../../components/productsComponents/Alert";
+import { useNavigate } from "react-router-dom";
 
 export default function CartProducts() {
-    const { cart} = useContext(CartContext);
-    console.log(cart);
+    const { cart } = useContext(CartContext);
+    const {userData} = useContext(UserContext);
+    const navigate = useNavigate();
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        if (cart.length) {
+            const reducer = (p, c) => p + c
+            setTotal(cart.map(e => e.price * e.qtd).reduce(reducer))
+        }
+    }, [cart])
+
+    function finish(){
+        if(!userData) {
+            sendAlert('warning', 'Você precisa estar logado para fazer uma compra');
+            navigate('/login');
+            return;
+        };
+        paymentAlert()
+            .then((result) => {
+                if(result.isConfirmed) {
+                    navigate('/ordercompletion');
+                } else if (result.isDenied){
+                    return;
+                }
+            })
+    };
+
     return (
         <>
             <Page>
-                <CartCard/>
+                <CartItens>
+                    {cart.map((e) => <CartCard data={e} key={e._id}/>)}
+                </CartItens>
+            <TotalValue>
+                <p>valor total:</p>
+                <p>{(total/100).toFixed(2)}R$</p>
+            </TotalValue>
+            <CardButtom onClick={finish}>Finalizar pedido</CardButtom>
             </Page>
         </>
     );
@@ -23,3 +60,28 @@ const Page = styled.article`
     padding: 8px;
 `;
 
+const CartItens = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: auto;
+    height: 450px;
+    overflow: scroll;
+`
+
+const TotalValue = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    margin: 10px;
+
+    p{
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+        letter-spacing: 0.01em;
+        color: #333333;
+    }
+`

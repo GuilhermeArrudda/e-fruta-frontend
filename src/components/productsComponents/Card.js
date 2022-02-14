@@ -15,7 +15,7 @@ export default function Card({data}) {
         if (counterValue <= 0) return
         const indexOfProduct = cart.map(e => e._id).indexOf(_id)
         if (indexOfProduct < 0){
-            setCart([...cart, {_id, qtd: counterValue, price}])
+            setCart([...cart, {_id, name, image, qtd: counterValue, price}])
             sendAlert('success', 'É pra já!', `
                 O produto foi adicionado ao seu carrinho!
                 Clique no ícone de carrinho no menu para ver seus produtos,
@@ -39,7 +39,6 @@ export default function Card({data}) {
             `)
             } 
             setCart(newCart)
-            console.log(cart)
         }
     }
 

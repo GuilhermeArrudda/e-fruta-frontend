@@ -1,149 +1,33 @@
-import { CardName, CardPrice } from "../productsComponents/Card";
+import CartContext from "../../context/CartContext";
 import styled from "styled-components";
-import { CardButtom } from "./CardButton";
 import CardCounter from "./CardCounter";
-import { useContext, useState } from "react";
-import { paymentAlert, sendAlert } from "./Alert";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../../context/UserContext";
-import Menu from "./Menu";
+import { useContext} from "react";
+
 
 export default function CartCard({data}) {
-    const stock = 1;
-    const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1);
-    const {userData} = useContext(UserContext);
+    const { name, qtd, price, stock, image} = data;
+    const [counterValue, setCounterValue] = useState(qtd);
     const navigate = useNavigate();
-
-    function finish(){
-        if(!userData) {
-            sendAlert('warning', 'Você precisa estar logado para fazer uma compra');
-            navigate('/login');
-            return;
-        };
-        paymentAlert()
-            .then((result) => {
-                if(result.isConfirmed) {
-                    navigate('/ordercompletion');
-                } else if (result.isDenied){
-                    return;
-                }
-            })
-    };
-
+    const productPrice = (price/100*counterValue).toFixed(2)
+    
     return(
-        <Container>
-            <Menu/>
-            <CartItens>
+        <>
                 <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
+                    <CardImg src={image} />
                     <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
+                        <p>{name}</p>
+                        <p>{productPrice}</p>
                         <CardCounter 
                             value={counterValue} 
                             setValue={setCounterValue} 
                         />
                     </div>
                 </CartItem>
-
-                <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
-                    <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-
-
-                <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
-                    <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-
-
-                <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
-                    <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-
-
-                <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
-                    <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-
-
-                <CartItem>
-                    <CardImg src="https://superprix.vteximg.com.br/arquivos/ids/175200-292-292/Banana-D-agua--6-unidades-aprox.-850g-.png?v=636294199116870000" />
-                    <div>
-                        <p>Banana</p>
-                        <p>R$10,00</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-            </CartItens>
-            <TotalValue>
-                <p>valor total:</p>
-                <p>30,00R$</p>
-            </TotalValue>
-            <CardButtom onClick={finish}>Finalizar pedido</CardButtom>
-        </Container>
+        </>
     )
 }
-
-const TotalValue = styled.div`
-    display: flex;
-    justify-content: space-between;
-
-    width: 100%;
-    margin: 10px;
-
-    p{
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 36px;
-        letter-spacing: 0.01em;
-        color: #333333;
-    }
-`
-
-const CartItens = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    scroll-behavior: auto;
-    height: 500px;
-    overflow: scroll;
-`
 
 const CartItem = styled.div`
     width: 100%;
@@ -168,11 +52,3 @@ const CardImg = styled.img`
     object-fit: cover;
     cursor: pointer;
 `;
-
-const Container = styled.article`
-    margin: 85px 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-`
