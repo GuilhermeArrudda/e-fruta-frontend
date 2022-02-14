@@ -23,13 +23,18 @@ function sendLogoutRequest(token) {
 };
 
 function getProductsRequest (token) {
-    return axios.get(`https://e-fruta.herokuapp.com/products`, generateConfig(token));
+    return axios.get(`${BASE_URL}/products`, generateConfig(token));
 };
+
+function getOrders (token, userId) {
+    return axios.get(`${BASE_URL}/pedidos/${userId}`, generateConfig(token));
+}
 
 
 export {
     sendSignUpRequest,
     sendSignInRequest,
     getProductsRequest,
-    sendLogoutRequest
+    sendLogoutRequest,
+    getOrders
 }

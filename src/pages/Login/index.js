@@ -7,21 +7,28 @@ import { GenericForm, Input } from "../../components/FormComponents/Input.js"
 import { useContext } from "react";
 import UserContext from '../../context/UserContext';
 import { sendSignInRequest } from "../../services/E-FrutaServer.js";
+import { sendAlert } from "../../components/productsComponents/Alert.js";
 
 export default function Login(){
     const { setUserData } = useContext(UserContext);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [data, setData] = useState({ email:"", password:"" })
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     function signIn(e){
-        setIsLoading(true);
-        e.preventDefault();
+        const email = data.email
+        const password = data.password
         const body = {
             email,
             password
         };
+        if(isLoading) return;
+        e.preventDefault();
+        if(!email || !password){
+            sendAlert('error', 'Opa! :(', 'Os campos devem estar preenchidos!');
+            return;
+        };
+        setIsLoading(true)
         sendSignInRequest(body)
             .then (response => {
                 setIsLoading(false);
@@ -31,18 +38,9 @@ export default function Login(){
             })
             .catch (error => {
                 setIsLoading(false);
-                if(!error.response){
-                alert('Servidor offline')
-                return;
-            };
-            if(error.response === 401) {
-                alert("Credenciais inválidas")
-                return;
-            };
-            if(error.response === 500) {
-                alert("Error do servidor")
-            };
-            alert('Ocorreu um erro inesperado')
+                console.log(error.response)
+                setUserData({ ...data, password:"" });
+                sendAlert('error', 'Oops! :(', 'Usuario e/ou senha incorreto(s)')
             });
     }
 
@@ -53,20 +51,20 @@ export default function Login(){
             <Input 
                 placeholder='E-mail' 
                 type="email" 
-                onChange={(e) => setEmail(e.target.value)} 
-                value={email}
+                onChange={(e)=>setData({...data, email: e.target.value})} 
+                value={data.email}
                 required
                 disabled={isLoading} 
             />
             <Input 
                 placeholder='Senha' 
                 type="password" 
-                onChange={(e) => setPassword(e.target.value)} 
-                value={password}
+                onChange={(e)=>setData({...data, password: e.target.value})}
+                value={data.password}
                 required
                 disabled={isLoading} 
             />
-            <Button>Entrar</Button>
+            <Button disabled={isLoading}>Entrar</Button>
             </GenericForm>
             <Link to={'/sign-up'}> Primeira vez? Cadastre-se!</Link>
         </Container>

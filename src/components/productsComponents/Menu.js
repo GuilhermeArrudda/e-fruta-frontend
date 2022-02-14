@@ -21,7 +21,7 @@ export default function Menu() {
     }
 
     function logout() {
-        sendLogoutRequest(userData)
+        sendLogoutRequest(userData.token)
         .then(response => {
             localStorage.removeItem("userData");
             window.location.reload();
@@ -29,6 +29,14 @@ export default function Menu() {
         .catch(error => {
             sendAlert("error", "Viish!", "Houve um problema para terminar a sessão, tente novamente.");
         });
+    };
+
+    function cartCounter() {
+        let counter = 0;
+        cart.forEach(item => {
+            counter+= item.qtd;
+        });
+        return counter;
     };
     
     return (
@@ -42,16 +50,17 @@ export default function Menu() {
                     <Cart onClick={() => change("/cart")}>
                         <RiShoppingCartLine />
                         <Counter>
+                            {cartCounter()}
                         </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={userData.image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={userData.user.image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
             </Wrapper>
-            <DropDownMenu showDropDown={showDropDown} token={userData}>
-                {userData ? 
+            <DropDownMenu showDropDown={showDropDown} token={userData.token}>
+                {userData.token ? 
                     <>
                         <p onClick={() => change("/pedidos")}>Meus Pedidos</p>
                         <p onClick={logout}>Sair</p>
@@ -95,7 +104,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown}) => showDropDown ? `70px` : `0px`};    
+    top: ${({showDropDown, userData}) => showDropDown ? `70px` : userData ? `-15px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 130px;
@@ -153,7 +162,7 @@ const Counter = styled.div`
     position: absolute;
     bottom: -5px;
     right: 0;
-    background: #00A4C5;
+    background: #c9d3c9;
     border-radius: 30px;
     font-size: 16px;
     max-width: 50px;
