@@ -55,7 +55,8 @@ export default function Card({data}) {
                 value={counterValue} 
                 setValue={setCounterValue} 
                 isDisabled={stock <= 0} 
-                stock={stock} 
+                stock={stock}
+                id = {_id} 
             />
             <CardButtom onClick={addToCart} disabled={stock <= 0} >Colocar no carrinho</CardButtom>
         </CardSC>

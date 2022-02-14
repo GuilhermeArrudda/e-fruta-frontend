@@ -7,26 +7,27 @@ import { useContext} from "react";
 import UserContext from "../../context/UserContext";
 
 export default function CartCard({data}) {
-    const { name, qtd, price, stock, image} = data;
+    const { name, qtd, price, stock, image, _id} = data;
     const [counterValue, setCounterValue] = useState(qtd);
     const navigate = useNavigate();
-    const productPrice = (price/100*counterValue).toFixed(2);
+    const productPrice = (price/100*qtd).toFixed(2);
     const {cart, setCart} = useContext(CartContext)
     
     return(
-        <>
-                <CartItem>
-                    <CardImg src={image} />
-                    <div>
-                        <p>{name}</p>
-                        <p>{productPrice}</p>
-                        <CardCounter 
-                            value={counterValue} 
-                            setValue={setCounterValue} 
-                        />
-                    </div>
-                </CartItem>
-        </>
+        <CartItem>
+            <CardImg src={image} />
+            <div>
+                <p>{name}</p>
+                <p>{productPrice}</p>
+                <CardCounter 
+                    value={counterValue} 
+                    setValue={setCounterValue}
+                    isDisabled={stock <= 0} 
+                    stock={stock}
+                    id = {_id} 
+                />
+            </div>
+        </CartItem>
     )
 }
 

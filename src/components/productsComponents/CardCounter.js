@@ -1,17 +1,37 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+import { useContext} from "react";
+import CartContext from "../../context/CartContext";
 
-export default function CardCounter ({value, setValue, isDisabled, stock, vertical}) {
-
+export default function CardCounter ({value, setValue, isDisabled, stock, vertical, id}) {
+    console.log(id);
+    const {cart, setCart} = useContext(CartContext)
     useEffect(() => {
         if(value < 0) setValue(0)
         if(value > stock) setValue(stock)
         // eslint-disable-next-line
     }, [value]);
-    
+
+    function count(type){
+        const item  = cart.find( item => item._id === id)
+        console.log(item);
+        if(type === "minus"){
+            if(item.qtd <= 0){
+                return;
+            }
+            setValue(value-1);
+            item && item.qtd--;
+        }
+        else{
+            setValue(value+1);
+            item && item.qtd++;
+        }
+        setCart([...cart])
+    }
+
     return (
         <CounterBox vertical={vertical}>
-            <CounterButton disabled={isDisabled} onClick={() => setValue(value-1)} >-</CounterButton>
+            <CounterButton disabled={isDisabled} onClick={() => count("minus")} >-</CounterButton>
             <QntdBox
                 type='number'
                 value={value} 
@@ -21,7 +41,7 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
                     if (value <= 0) setValue(0)
                 }}
             />
-            <CounterButton disabled={isDisabled} onClick={() => setValue(value+1)}  >+</CounterButton>
+            <CounterButton disabled={isDisabled} onClick={() => count("plus")} >+</CounterButton>
         </CounterBox>
     )
 };

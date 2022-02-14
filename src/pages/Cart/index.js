@@ -9,18 +9,20 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../../components/productsComponents/Menu";
 import Footer from "../../components/productsComponents/Footer";
 
-export default function CartProducts() {
+export default function CartProducts(props) {
     const { cart, setCart } = useContext(CartContext);
     const {userData} = useContext(UserContext);
     const navigate = useNavigate();
     const [total, setTotal] = useState(0);
-
+    console.log(cart)
+    const [quantityArray, setQauntityArray] = useState(cart.map (e => e.qtd))
+    console.log(quantityArray);
     useEffect(() => {
         if (cart.length) {
             const reducer = (p, c) => p + c
             setTotal(cart.map(e => e.price * e.qtd).reduce(reducer))
         }
-    }, [cart])
+    }, [cart, quantityArray])
 
     function finish(){
         if(!userData) {
@@ -44,7 +46,7 @@ export default function CartProducts() {
             <Menu/>
             <Page>
                 <CartItens>
-                    {cart.map((e) => <CartCard data={e} key={e._id}/>)}
+                    {cart.map((e) => <CartCard  data={e} key={e._id}/>)}
                 </CartItens>
             <TotalValue>
                 <p>valor total:</p>
@@ -52,7 +54,6 @@ export default function CartProducts() {
             </TotalValue>
             <CardButtom onClick={finish}>Finalizar pedido</CardButtom>
             </Page>
-            <Footer/>
         </>
     );
 };
