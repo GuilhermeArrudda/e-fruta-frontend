@@ -5,14 +5,12 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import UserContext from "../../context/UserContext";
 import CartContext from "../../context/CartContext";
-import { sendAlert } from "./Alert";
 import cat from "../../assets/cat.png"
-import { sendLogoutRequest } from "../../services/E-FrutaServer";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
     const {cart} = useContext(CartContext);
-    const {userData} = useContext(UserContext);
+    const {userData, setUserData} = useContext(UserContext);
     const navigate = useNavigate();
 
     function change(whereTo) {
@@ -21,14 +19,9 @@ export default function Menu() {
     }
 
     function logout() {
-        sendLogoutRequest(userData.token)
-        .then(response => {
             localStorage.removeItem("userData");
+            localStorage.removeItem("cart")
             window.location.reload();
-        })
-        .catch(error => {
-            sendAlert("error", "Viish!", "Houve um problema para terminar a sessão, tente novamente.");
-        });
     };
 
     function cartCounter() {
@@ -54,7 +47,7 @@ export default function Menu() {
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
                         <img src={
-                            userData !== "" ? 
+                            userData !== ""? 
                             userData.user.image
                             :
                             "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} 
@@ -67,7 +60,6 @@ export default function Menu() {
             <DropDownMenu showDropDown={showDropDown} token={userData.token}>
                 {userData.token ? 
                     <>
-                        <p onClick={() => change("/pedidos")}>Meus Pedidos</p>
                         <p onClick={logout}>Sair</p>
                     </>
                     :

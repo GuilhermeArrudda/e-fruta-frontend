@@ -14,13 +14,6 @@ const Container = styled.article`
     
     color: #FFFFFF;
   }
-
-  img{
-    margin-bottom: 30px;
-
-    width: 147px;
-    height: 100%;
-  }
 `;
 
 export default Container;
