@@ -6,6 +6,8 @@ import { CardButtom } from "../../components/productsComponents/CardButton";
 import UserContext from "../../context/UserContext";
 import { paymentAlert, sendAlert } from "../../components/productsComponents/Alert";
 import { useNavigate } from "react-router-dom";
+import Menu from "../../components/productsComponents/Menu";
+import Footer from "../../components/productsComponents/Footer";
 
 export default function CartProducts() {
     const { cart } = useContext(CartContext);
@@ -38,6 +40,7 @@ export default function CartProducts() {
 
     return (
         <>
+            <Menu/>
             <Page>
                 <CartItens>
                     {cart.map((e) => <CartCard data={e} key={e._id}/>)}
@@ -48,6 +51,7 @@ export default function CartProducts() {
             </TotalValue>
             <CardButtom onClick={finish}>Finalizar pedido</CardButtom>
             </Page>
+            <Footer/>
         </>
     );
 };
@@ -58,6 +62,7 @@ const Page = styled.article`
     flex-wrap: wrap;
     gap: 20px;
     padding: 8px;
+    margin-top: 85px;
 `;
 
 const CartItens = styled.div`

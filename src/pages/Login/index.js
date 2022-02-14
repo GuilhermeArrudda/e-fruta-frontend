@@ -34,7 +34,7 @@ export default function Login(){
                 setIsLoading(false);
                 setUserData(response.data);
                 localStorage.setItem("userData", JSON.stringify(response.data));
-                navigate('/products');
+                navigate('/');
             })
             .catch (error => {
                 setIsLoading(false);

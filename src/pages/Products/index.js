@@ -10,11 +10,15 @@ import Menu from "../../components/productsComponents/Menu";
 export default function Products() {
     const [products, setProducts] = useState(null);
     const { cart } = useContext(CartContext);
+    console.log(cart)
 
     useEffect (() => {
         renderProducts()
     }, [cart]);
-    
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
     function renderProducts() {
         getProductsRequest()
@@ -44,7 +48,8 @@ const Container = styled.div`
 `;
 
 const Page = styled.article`
-    margin: 85px 0;
+    margin-top: 85px;
+    margin-bottom: 180px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
